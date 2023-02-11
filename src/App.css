@@ -1,38 +1,191 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Prosto+One&display=swap');
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body{
+  background-color: #000000 !important;
+  color: #fff !important;
+}
+#root, .app{
+  width: 100%;
+  height: 100%;
+}
+body, .home-wrapper, .nombre-wrapper, .utd-wrapper, .carrera-wrapper{
+  margin:0;
+  display:grid;
+  place-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  font-family: Montserrat;
+  font-weight: 600;
+}
+nav{
+  position: absolute;
+  inset: 0 80% 0 0;
+  background-color: #202020;
+  display: grid;
+  place-content: center;
+  z-index: 99;
+}
+nav ul{
+  list-style-type: none;
+  font-size: 1.25rem;
+}
+nav li{
+  margin-block: 2rem;
+}
+nav a{
+  text-decoration: none;
+  font-size: 1.5rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+nav a:hover > .hash{
+  animation: list-hover 2s ease-out forwards;
+}
+nav a:hover > .nav-link-style::after{
+  transform-origin: left;
+  scale: 1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes list-hover {
+  0%{
+    color: #fff;
+    
+    text-shadow: 0 0 1rem #ffffff50;
+  }
+  100%{
+    color: #ffffff50;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+nav a .hash{
+  color: #ffffff50;
+  margin-inline-end: 1rem;
+}
+.nav-link-style{
+  color: #ffffff50;
+  display: inline-block;
+  width: fit-content;
+  transition: color 0.6s cubic-bezier(0, 0, 0.19, 1.29);
+}
+nav a:hover .nav-link-style{
+  color: #fff;
+}
+.nav-link-style::after{
+  content: "";
+  height: 0.2rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  display: block;
+  background-color: #fff;
+  margin-top: 0.2rem;
+  scale: 0 1;
+  transition: scale 0.2s ease;
+  transform-origin: right;
+}
+
+.home-wrapper{
+  background-color: #000000;
+}
+.nombre-wrapper{
+  background-color: #16425B;
+}
+.utd-wrapper{
+  background-color: hsl(163, 36%, 41%);
+}
+.carrera-wrapper{
+  background-color: darkblue;
+}
+
+h1{
+  margin:0;
+  padding:0;
+  font-size: 8rem !important;
+  text-transform:uppercase;
+  position:relative;
+  color: hsl(0, 0%, 50%);
+}
+h1:before{
+  content:"";
+  position:absolute;
+  color: hsl(0, 0%, 100%);
+  top:0;
+  left:0;
+  width:0%;
+  overflow:hidden;
+  transition:all 0.5s;
+  white-space: nowrap;
+}
+h1:hover:before{
+  width:100%;
+}
+
+.home:before{
+  content: 'home';
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.nombre{
+  font-size: 6rem !important;
+  color: #ffffff50;
+}
+.nombre:before{
+  content: 'Uriel González';
+  color: #fff;
+}
+.utd{
+  color: hsl(0, 0%, 85%);
+}
+.utd:before{
+  content: 'UTD';
+  color: hsl(42, 79%, 68%);
+}
+.carrera{
+  font-size: 5rem !important;
+  text-align: center;
+  color: #ffffff50;
+  width: fit-content;
+  transition: color 0.5s ease-out;
+}
+.carrera:hover{
+  color: #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h2{
+  margin-block-end: 8rem;
+}
+.utd-logo{
+  width: 50vw;
+  padding: 2rem;
+  background-color: #f6f6f6;
+  border-radius: 0.5rem;
+  transition: scale 0.2s ease;
+}
+.utd-logo:hover{
+  scale: 1.05;
+}
+
+.fotopro{
+  height: 13rem;
+  width: 13rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 1rem 0.5rem #00000030;
+}
+.fotopro:hover{
+  scale: 1.5
+}
+.wrapper-center{
+  height: 100%;
+  display: grid;
+  padding-inline: 20%;
+  place-items: center;
+}
+.carousel{
+  width: 100%;
+}
+.carousel-item img{
+  height: 500px ;
+  width: 100%;
 }
