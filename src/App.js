@@ -3,7 +3,10 @@ import { Routes, Route, Link } from "react-router-dom";
 import img from "./imgs/fotopro.jpeg";
 import { useState } from "react";
 import Carrusel from "./carrusel";
-
+import GoogleMap from './mapsAPI'
+import pdf from './files/cv.pdf';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faCode, faFileLines, faGraduationCap, faHome, faImage, faLocationDot, faPen, faSchool, faUser } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -38,7 +41,7 @@ function Carrera() {
 function Logo() {
   return(
     <div className="wrapper-center">
-      <a href="https://utd.edu.mx"><img className="utd-logo" src='https://www.seekpng.com/png/detail/263-2635426_deportes-utd-universidad-tecnologica-de-durango-logo.png'></img></a>
+      <a href="https://utd.edu.mx"><img alt="Logo UTD" className="utd-logo" src='https://www.seekpng.com/png/detail/263-2635426_deportes-utd-universidad-tecnologica-de-durango-logo.png'></img></a>
     </div>
   )
 }
@@ -46,52 +49,43 @@ function Foto() {
   return(
   <div className="wrapper-center">
     <h2 style={{alignSelf: 'end', marginBottom: '4rem'}}>Hola, busco empleo</h2>
-    <img className="fotopro" src={img} style={{alignSelf: 'start'}}></img>
+    <img alt="Perfil" className="fotopro" src={img} style={{alignSelf: 'start'}}></img>
   </div>
   )
 
 }
 function Alumnos() {
   return(
-    <div>Currículum</div>
-  )
-}
-function Mapa() {
-  return(
-    <div>Mapa</div>
-  )
-}
-function Galeria() {
-  return(
-    <div>Carrusel</div>
-  )
-}
 
+    <div className="wrapper-center">
+      <iframe title="curriculum" src={pdf} height='70%' width='100%'></iframe>
+    </div>
+
+  )
+}
 
 function App() {
 
-  const longNavLinks = ['Home', 'Nombre', 'UTD', 'Carrera', 'Logo', 'Foto', 'Alumnos', 'Mapa', 'Galeria']
+  const links = [['Home', faHome], ['Nombre', faPen], ['UTD', faSchool], ['Carrera', faCode], ['Logo', faGraduationCap], ['Foto', faUser], ['Alumnos', faFileLines], ['Mapa', faLocationDot], ['Galeria', faImage]]
 
-  const [links, setLinks] = useState(longNavLinks)
-  
-  console.log(links)
+  const [nav, setNav] = useState(false)
+
+  const navToggle = () =>{
+    setNav(!nav)
+  }
   return (
     <div className="app">
-      <nav>
+      <nav className={`${nav ? 'nav-open' : 'nav-collapsed'}`}>
+        <button className="nav-toggle" onClick={navToggle}><FontAwesomeIcon icon={faBars} /></button>
         <ul>
           {
             links.map(link =>(
-              <li><Link to={link === 'Home' ? '/' : link.toLowerCase()}><span className="hash">#</span><span className="nav-link-style">{link}</span></Link></li>
+              <li key={link[0]}><Link to={link[0] === 'Home' ? '/' : link[0].toLowerCase()}><FontAwesomeIcon className="hash" icon={link[1]}></FontAwesomeIcon><span className="nav-link-style">{link[0]}</span></Link></li>
             ))
           }
-          {/* <li><Link to={'/'}><span className="hash">#</span><span className="nav-link">Home</span></Link></li>
-          <li><Link to={'/nombre'}><span className="hash">#</span><span className="nav-link">Nombre</span></Link></li>
-          <li><Link to={'/UTD'}><span className="hash">#</span><span className="nav-link">UTD</span></Link></li>
-          <li><Link to={'/logo'}><span className="hash">#</span><span className="nav-link">Logo UTD</span></Link></li>
-          <li><Link to={'/carrera'}><span className="hash">#</span><span className="nav-link">Carrera</span></Link></li> */}
-
         </ul>
       </nav>
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/nombre" element={<Nombre />} />
@@ -100,8 +94,8 @@ function App() {
         <Route path="/carrera" element={<Carrera />} />
         <Route path="/foto" element={<Foto />} />
         <Route path="/alumnos" element={<Alumnos />} />
-        <Route path="/mapa" element={<Mapa />} />
         <Route path="/galeria" element={<Carrusel />} />
+        <Route path="/mapa" element={<GoogleMap />} />
       </Routes>
     </div>
   );
