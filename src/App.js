@@ -1,13 +1,19 @@
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
-import img from "./imgs/fotopro.jpeg";
-import { useState } from "react";
+import img from "./imgs/fotopro.jpg";
+
 import Carrusel from "./carrusel";
 import GoogleMap from './mapsAPI'
 import pdf from './files/cv.pdf';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faCode, faFileLines, faGraduationCap, faHome, faImage, faLocationDot, faPen, faSchool, faUser } from '@fortawesome/free-solid-svg-icons'
 
+
+
+//npm install: 
+//reactstrap
+//google-maps-react --force
+//react bootstrap (npm install react-bootstrap bootstrap)
+//react-places-autocomplete --force
+//react-router-dom
 
 
 function Home() {
@@ -20,7 +26,7 @@ function Home() {
 function Nombre() {
   return(
   <div className="nombre-wrapper">
-    <h1 className="nombre">Uriel González</h1>
+    <h1 className="nombre">Nombre</h1>
   </div>
   )
 }
@@ -48,8 +54,7 @@ function Logo() {
 function Foto() {
   return(
   <div className="wrapper-center">
-    <h2 style={{alignSelf: 'end', marginBottom: '4rem'}}>Hola, busco empleo</h2>
-    <img alt="Perfil" className="fotopro" src={img} style={{alignSelf: 'start'}}></img>
+    <img alt="Perfil" className="fotopro" src={img}></img>
   </div>
   )
 
@@ -57,45 +62,55 @@ function Foto() {
 function Alumnos() {
   return(
 
-    <div className="wrapper-center">
-      <iframe title="curriculum" src={pdf} height='70%' width='100%'></iframe>
-    </div>
+      <iframe title="curriculum" src={pdf} height='70%' width='50%' style={{position: 'relative', left: '50%', translate: '-50% 0'}}></iframe>
 
   )
 }
 
 function App() {
 
-  const links = [['Home', faHome], ['Nombre', faPen], ['UTD', faSchool], ['Carrera', faCode], ['Logo', faGraduationCap], ['Foto', faUser], ['Alumnos', faFileLines], ['Mapa', faLocationDot], ['Galeria', faImage]]
 
-  const [nav, setNav] = useState(false)
-
-  const navToggle = () =>{
-    setNav(!nav)
-  }
   return (
     <div className="app">
-      <nav className={`${nav ? 'nav-open' : 'nav-collapsed'}`}>
-        <button className="nav-toggle" onClick={navToggle}><FontAwesomeIcon icon={faBars} /></button>
+      <nav>
+        
         <ul>
-          {
-            links.map(link =>(
-              <li key={link[0]}><Link to={link[0] === 'Home' ? '/' : link[0].toLowerCase()}><FontAwesomeIcon className="hash" icon={link[1]}></FontAwesomeIcon><span className="nav-link-style">{link[0]}</span></Link></li>
-            ))
-          }
+          
+          <Link to={'/'}>Home</Link>
+          <Link to={'nombre'}>Nombre</Link>
+          <Link to={'UTD'}>UTD</Link>
+          <Link to={'logo'}>Logo</Link>
+          <Link to={'carrera'}>Carrrera</Link>
+          <Link to={'foto'}>Foto</Link>
+          <Link to={'alumnos'}>Alumnos</Link>
+          <Link to={'galeria'}>Galeria</Link>
+          <Link to={'mapa'}>Mapa</Link>
+
+
         </ul>
       </nav>
+
       
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/nombre" element={<Nombre />} />
+        <Route path="/">
+          <Route index element={<Home />}/>
+          <Route path="nombre" element={<Nombre />} />
+          <Route path="UTD" element={<UTD />} />
+          <Route path="logo" element={<Logo />} />
+          <Route path="carrera" element={<Carrera />} />
+          <Route path="foto" element={<Foto />} />
+          <Route path="alumnos" element={<Alumnos />} />
+          <Route path="galeria" element={<Carrusel />} />
+          <Route path="mapa" element={<GoogleMap />} />
+        </Route>
+        {/* <Route path="/nombre" element={<Nombre />} />
         <Route path="/UTD" element={<UTD />} />
         <Route path="/logo" element={<Logo />} />
         <Route path="/carrera" element={<Carrera />} />
         <Route path="/foto" element={<Foto />} />
         <Route path="/alumnos" element={<Alumnos />} />
         <Route path="/galeria" element={<Carrusel />} />
-        <Route path="/mapa" element={<GoogleMap />} />
+        <Route path="/mapa" element={<GoogleMap />} /> */}
       </Routes>
     </div>
   );

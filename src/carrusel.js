@@ -10,17 +10,17 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const items = [
   {
-    src: require('./imgs/calle.jpg'),
+    src: require('./imgs/calle.jpg'), //Cambiar imagen
     altText: 'Hable ahora o calle para siempre',
     caption: 'Patricio y bob'
   },
   {
-    src: require('./imgs/amongla.gif'),
+    src: require('./imgs/amongla.gif'), //Cambiar imagen
     altText: 'Among US',
     caption: 'Amogus hablando'
   },
   {
-    src: require('./imgs/colonia_royale.jpg'),
+    src: require('./imgs/colonia_royale.jpg'), //Cambiar imagen
     altText: 'Colonia clash royale',
     caption: 'Colonia royale'
   }
@@ -80,16 +80,16 @@ class Carrusel extends Component {
 
     return (
         <div className='wrapper-center'>
-        <Carousel
-        activeIndex={activeIndex}
-        next={this.next}
-        previous={this.previous}
-        >
-        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-        {slides}
-        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-        </Carousel>
+          <Carousel
+          activeIndex={activeIndex}
+          next={this.next}
+          previous={this.previous}
+          >
+          <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+          {slides}
+          <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+          <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+          </Carousel>
         </div>
       
     );
