@@ -1,13 +1,17 @@
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
-import img from "./imgs/fotopro.jpeg";
+import fotopro from "./imgs/fotopro.jpeg";
+import mockup from './imgs/mockup.png'
 import { useState } from "react";
 import Carrusel from "./carrusel";
 import GoogleMap from './mapsAPI'
 import pdf from './files/cv.pdf';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faCode, faFileLines, faGraduationCap, faHome, faImage, faLocationDot, faPen, faSchool, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCode, faFileLines, faGraduationCap, faHome, faImage, faLocationDot, faPen, faSchool, faUser, faPalette, faRightToBracket} from '@fortawesome/free-solid-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
+import Login from "./Login";
 
 
 
@@ -29,6 +33,7 @@ function Home() {
         <Card title={'React Strict Mode'} text={'StrictMode es una herramienta para destacar problemas potenciales en la aplicación. Al igual que Fragment, StrictMode no renderiza nada en la interfaz de usuario. Este modo también activa advertencias y comprobaciones adicionales para sus descendientes.'} order={'second'}></Card>
         <Card title={'Método Return'} text={'Este método es obligatorio en cualquier componente, pues como su nombre lo indica, se utiliza para obtener los elementos finales a visualizar y renderizar en el navegador. Debe ser una funcion pura, es decir, no debe modificar las props, no debe modificar el state, ni realizar operaciones en el DOM'} order={'third'}></Card>
       </div>
+      <a href="https://github.com/UriProtocol" target="_blank"><button className="login-button github-button"><FontAwesomeIcon icon={faGithub}/> GitHub</button></a>
     </div>
   );
 }
@@ -53,6 +58,15 @@ function Carrera() {
   </div>
   )
 }
+
+function Mockup(){
+  return(
+    <div className="wrapper-center">
+      <h2 style={{marginTop: '1rem'}}>Mockup</h2>
+      <img alt="Mockup integradora" className="" src={mockup} style={{alignSelf: 'start'}} width='90%'></img>
+    </div>
+  )
+}
 function Logo() {
   return(
     <div className="wrapper-center">
@@ -64,7 +78,7 @@ function Foto() {
   return(
   <div className="wrapper-center">
     <h2 style={{alignSelf: 'end', marginBottom: '4rem'}}>Hola, busco empleo</h2>
-    <img alt="Perfil" className="fotopro" src={img} style={{alignSelf: 'start'}}></img>
+    <img alt="Perfil" className="fotopro" src={fotopro} style={{alignSelf: 'start'}}></img>
   </div>
   )
 
@@ -81,7 +95,7 @@ function Alumnos() {
 
 function App() {
 
-  const links = [['Inicio', faHome], ['Nombre', faPen], ['UTD', faSchool], ['Carrera', faCode], ['Logo', faGraduationCap], ['Foto', faUser], ['Alumnos', faFileLines], ['Mapa', faLocationDot], ['Galeria', faImage]]
+  const links = [['Inicio', faHome], ['Nombre', faPen], ['Mockup', faPalette], ['Logo', faGraduationCap], ['Foto', faUser], ['Alumnos', faFileLines], ['Mapa', faLocationDot], ['Galeria', faImage], ['Login',faRightToBracket]]
 
   const [nav, setNav] = useState(false)
 
@@ -107,12 +121,17 @@ function App() {
           <Route index element={<Home />}/>
           <Route path="nombre" element={<Nombre />} />
           <Route path="UTD" element={<UTD />} />
+          
           <Route path="logo" element={<Logo />} />
           <Route path="carrera" element={<Carrera />} />
+          <Route path="mockup" element={<Mockup />} />
           <Route path="foto" element={<Foto />} />
           <Route path="alumnos" element={<Alumnos />} />
           <Route path="galeria" element={<Carrusel />} />
           <Route path="mapa" element={<GoogleMap />} />
+          <Route path="login" element={<Login />} />
+
+
         </Route>
         {/* <Route path="/nombre" element={<Nombre />} />
         <Route path="/UTD" element={<UTD />} />
@@ -123,6 +142,7 @@ function App() {
         <Route path="/galeria" element={<Carrusel />} />
         <Route path="/mapa" element={<GoogleMap />} /> */}
       </Routes>
+      
     </div>
   );
 }
